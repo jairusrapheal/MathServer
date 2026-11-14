@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>CALCULATION</title>
+</head>
+<body>
+    <h1>JAIRUS RAPHEAL</h1>
+    <br>
+    <h1>churnrate</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>
+            initial customer count:
+            <input type="number"
+            value="{{ initial }}"
+            name="length">
+        </label>
+        <br>
+        <br>
+         <label>
+            costemer lost count:
+            <input type="number"
+            value="{{ costemers }}"
+            name="breath">
+             
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="calculate">
+        <br>
+        <br>
+         <label>
+            area:
+            <input type="number "
+            value="{{ a }}">
+        </label>
+        <br>
+        <br>
+    </form>
+</body>
+</html>

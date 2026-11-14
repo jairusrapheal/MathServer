@@ -42,13 +42,85 @@ Render the result to the HTML template.
 Publish the website in Localhost.
 
 ## PROGRAM:
+```
+<html>
+<head>
+    <title>CALCULATION</title>
+</head>
+<body>
+    <h1>JAIRUS RAPHEAL</h1>
+    <br>
+    <h1>churnrate</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>
+            initial customer count:
+            <input type="number"
+            value="{{ initial }}"
+            name="length">
+        </label>
+        <br>
+        <br>
+         <label>
+            costemer lost count:
+            <input type="number"
+            value="{{ costemers }}"
+            name="breath">
+             
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="calculate">
+        <br>
+        <br>
+         <label>
+            area:
+            <input type="number "
+            value="{{ a }}">
+        </label>
+        <br>
+        <br>
+    </form>
+</body>
+</html>
 
+views.py
+from django.shortcuts import render
+
+def churnrate(request):
+    initial= float(request.POST.get('length', '0'))
+    costemers= float(request.POST.get('breath', '0'))
+
+    a = (initial/costemers)*100 if request.method == 'POST' else 0
+
+    print("initial customer count =",initial)
+    print("costemer lost count =",costemers)
+    print("churnrate =", a)
+
+    return render(
+        request,
+        'myapp/mathserv.html',
+        {'initial': initial, 'costemers': costemers, 'a': a}
+    )
+
+urls.py
+
+from django.contrib import admin
+from django.urls import path
+from myapp import views
+
+urlpatterns = [
+    path('', views.churnrate, name='churnrate'),
+]
+
+```
 
 ## OUTPUT - SERVER SIDE:
 
+![alt text](<Screenshot 2026-11-14 131541.png>)
 
 ## OUTPUT - WEBPAGE:
 
-
+![alt text](<Screenshot 2026-11-14 131451-1.png>)
 ## RESULT:
 The the web page to calculate Churn Rate using server-side scripts is created successfully.
